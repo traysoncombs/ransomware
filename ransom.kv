@@ -1,0 +1,97 @@
+<ransom>:
+    rows: 4
+    cols: 1
+    canvas.before:
+        Color:
+            rgb: 0.5, 0, 0,
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    AnchorLayout:
+        anchor_y: 'center'
+        Label:
+            font_size: 25
+            size_hint: 1.0, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            id: countdown
+    AnchorLayout:
+        anchor_x: 'center'
+        Label:
+            id: informationaltext
+            size_hint: 1.0, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            markup: True
+
+    AnchorLayout:
+        id: verify_button
+        anchor_x: 'center'
+        padding: root.size[1]/8, 25
+        Button:
+            background_normal: ''
+            background_color: 0, 0, 0, 1
+            size_hint: 0.5, None
+            height: dp(45)
+            markup: True
+            text: '[color=#FFFFFFFF]verify[/color]'
+            on_press: self.opacity = 0.4; root.verify()
+            on_release: self.opacity = 1
+
+<true_popup>:
+    title: 'decrypting'
+    auto_dismiss: False
+    size_hint: 0.5, 0.5
+    GridLayout:
+        id: dec_layout
+        cols: 1
+        rows: 4
+        Label:
+            id: dec1
+            text: 'Decrypting'
+        ProgressBar:
+            id: decrypting
+            value: 1
+        Label:
+            id: dec2
+            text: ''
+        Label:
+            id: percent
+            text: ''
+
+
+<false_popup>:
+    title: 'Error'
+    size_hint: 0.5, 0.5
+    auto_dismiss: False
+    GridLayout:
+        cols: 1
+        rows: 4
+        Label:
+            text: ''
+        Label:
+            size_hint: 1.0, None
+            text_size: self.width, None
+            height: self.texture_size[1]
+            halign: 'center'
+            text: 'Naughty naughty, looks like you tried to verify the transaction before making it, that\'s just not going to work.'
+        Label:
+            text: ''
+        Button:
+            background_normal: ''
+            background_color: 0, 0, 0, 1
+            size_hint: 0.5, None
+            height: dp(45)
+            markup: True
+            text: '[color=#FFFF]close[/color]'
+            on_release: root.dismiss()
+
+<btn>:
+    background_normal: ''
+    background_color: 0, 0, 0, 1
+    size_hint: 0.5, None
+    height: dp(45)
+    markup: True
+    text: '[color=#FFFF]close[/color]'
